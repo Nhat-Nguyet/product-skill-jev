@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description:
     'Score features with RICE, write PRDs, manage Epics, detect conflicts, track stakeholders. Plain language. Files you own.',
   keywords: ['product management', 'PRD', 'AI', 'RICE scoring', 'product requirements'],
-  authors: [{ name: 'Product Management Skill Jev' }],
+  authors: [{ name: 'Nhat Nguyet', url: 'https://nhatnguyet.org' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://nhatnguyet.org',
-    siteName: 'Product Management Skill Jev',
+    siteName: 'Nhat Nguyet',
     title: 'Product Management Skill Jev: AI co-pilot for product managers',
     description: 'Score features with RICE, write PRDs, manage Epics. Plain language. Files you own.',
   },

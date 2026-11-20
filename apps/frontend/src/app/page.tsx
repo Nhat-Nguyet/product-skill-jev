@@ -81,7 +81,10 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-gray-800 text-center text-gray-500 text-sm">
-        Product Management Skill Jev · CC BY-NC 4.0 ·{' '}
+        <a href="https://nhatnguyet.org" className="hover:text-white transition">
+          Nhat Nguyet
+        </a>{' '}
+        · CC BY-NC 4.0 ·{' '}
         <a href="https://github.com/Nhat-Nguyet/product-skill-jev" className="hover:text-white transition">
           GitHub
         </a>
