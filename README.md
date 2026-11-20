@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="apps/frontend/public/logo.png" alt="Product Management Skill Jev" width="96">
-</p>
-
 <h1 align="center">Product Management Skill Jev</h1>
 
 <p align="center">

@@ -34,9 +34,6 @@ export function Sidebar() {
     <aside className="flex flex-col w-16 lg:w-56 h-screen bg-gray-900 border-r border-gray-800 shrink-0">
       {/* Logo */}
       <div className="flex items-center gap-3 px-4 py-5 border-b border-gray-800">
-        <div className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 overflow-hidden">
-          <img src="/logo.png" alt="Product Management Skill Jev" className="w-8 h-8 object-cover" />
-        </div>
         <span className="hidden lg:block text-sm font-semibold text-white truncate">Product Management Skill Jev</span>
       </div>
 

@@ -14,10 +14,6 @@ export const metadata: Metadata = {
     'Score features with RICE, write PRDs, manage Epics, detect conflicts, track stakeholders. Plain language. Files you own.',
   keywords: ['product management', 'PRD', 'AI', 'RICE scoring', 'product requirements'],
   authors: [{ name: 'Product Management Skill Jev' }],
-  icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
-  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -25,13 +21,11 @@ export const metadata: Metadata = {
     siteName: 'Product Management Skill Jev',
     title: 'Product Management Skill Jev: AI co-pilot for product managers',
     description: 'Score features with RICE, write PRDs, manage Epics. Plain language. Files you own.',
-    images: [{ url: '/logo.png', width: 512, height: 512, alt: 'Product Management Skill Jev' }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Product Management Skill Jev',
     description: 'AI Co-pilot for Product Managers',
-    images: ['/logo.png'],
   },
   robots: { index: true, follow: true },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),

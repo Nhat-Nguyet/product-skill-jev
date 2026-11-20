@@ -15,7 +15,6 @@ export default function LandingPage() {
           v1.0 Foundation — Now available
         </div>
 
-        <img src="/logo.png" alt="Product Management Skill Jev" className="w-24 h-24 mb-6 rounded-2xl object-cover" />
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
           Product Management Skill Jev
         </h1>
