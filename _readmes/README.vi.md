@@ -1,470 +1,196 @@
-[🇺🇸 English](../README.md)
+<p align="center">
+  <img src="../apps/frontend/public/logo.png" alt="Product Management Skill Jev" width="96">
+</p>
+
+<h1 align="center">Product Management Skill Jev</h1>
 
 <p align="center">
-  <strong>Product Management Skill Jev</strong>
+  <b>Trợ lý quản lý sản phẩm viết hộ tài liệu, giữ quy trình cho nghiêm, và để mọi quyết định lại cho bạn.</b><br>
+  21 kỹ năng từ yêu cầu tính năng tới yêu cầu thay đổi · PRD đã duyệt thì khoá, thay đổi thành phiên bản mới · xung đột giữa các PRD tìm bằng phép quét thẻ tất định · markdown thuần trong thư mục của bạn · Telegram, cổng web hoặc Claude Code · Anthropic, OpenAI, Gemini, Groq hoặc mô hình Ollama chạy trên máy · 170 test
 </p>
 
 <p align="center">
-  Một trợ lý quản lý sản phẩm viết hộ bạn tài liệu, giữ quy trình cho nghiêm,<br/>
-  và để mọi quyết định lại cho bạn. Vào bằng lời nói thường, ra bằng markdown thường.
+  <a href="../README.md">English</a> · <b>Tiếng Việt</b> · <a href="README.zh-CN.md">中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.fr.md">Français</a> · <a href="README.es.md">Español</a>
+  <br>
+  <a href="#bắt-đầu-nhanh">Bắt đầu nhanh</a> ·
+  <a href="#ví-dụ">Ví dụ</a> ·
+  <a href="#kỹ-năng">Kỹ năng</a> ·
+  <a href="../AGENT.md">Luật của agent</a> ·
+  <a href="../examples/aipm-skills-project">Dự án mẫu</a>
 </p>
 
 <p align="center">
-  <a href="https://www.anthropic.com/"><img src="https://img.shields.io/badge/Claude-Recommended-191919?style=flat-square&logo=anthropic&logoColor=white" alt="Anthropic Claude" /></a>
-  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python_3.12-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /></a>
-  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_14-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" /></a>
-  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" /></a>
-  <a href="https://telegram.org/"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white" alt="Telegram" /></a>
-  <img src="https://img.shields.io/badge/Tests-170_passing-2f855a?style=flat-square" alt="Tests" />
-  <img src="https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey?style=flat-square" alt="CC BY-NC 4.0" />
+  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-000?style=flat-square&logo=next.js&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-compose-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Tests: 170" src="https://img.shields.io/badge/tests-170-2f855a?style=flat-square">
+  <a href="../LICENSE"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC_BY--NC_4.0-lightgrey?style=flat-square"></a>
 </p>
 
-<p align="center">
-  🌐 <a href="../README.md">🇺🇸 English</a> ·
-  🇻🇳 Tiếng Việt (bạn đang ở đây) ·
-  <a href="README.zh-CN.md">🇨🇳 中文</a> ·
-  <a href="README.fr.md">🇫🇷 Français</a> ·
-  <a href="README.ja.md">🇯🇵 日本語</a> ·
-  <a href="README.es.md">🇪🇸 Español</a>
-</p>
+> Bản tiếng Anh ([README.md](../README.md)) là bản gốc. Bản này có cùng dữ kiện và cùng bố cục.
 
-> Bản dịch này có thể chậm hơn [bản tiếng Anh](../README.md) một vài phiên bản. Bản tiếng Anh là bản gốc.
+## Bắt đầu nhanh
 
+Cần Docker và một khoá API của mô hình. Claude cho tài liệu tốt nhất; khoá Groq miễn phí đủ để dùng thử.
+
+```bash
+git clone https://github.com/Nhat-Nguyet/product-skill-jev.git my-pm-workspace
+cd my-pm-workspace
+cp .env.example .env      # đặt AI_PROVIDER và một khoá, thêm TELEGRAM_BOT_TOKEN nếu dùng bot
+bash setup.sh             # 1) bot Telegram  2) cổng web  3) cả hai
+```
+
+Bạn nhận được:
+
+- **Cổng web** ở `http://localhost` (lựa chọn 2 và 3): bên trái là khung chat, bên phải là tài liệu đang được viết, cùng các trang Dự án, Cài đặt và Nhật ký thay đổi. Một dự án mẫu được chép vào `my-projects/` để có sẵn thứ mở ra xem ngay.
+- **Bot Telegram** (lựa chọn 1 và 3): gửi `/start` cho bot, rồi `Show all projects`.
+- **Claude Code** không cần Docker: `cp AGENT.md CLAUDE.md`, rồi chạy `claude` trong thư mục. Các kỹ năng ở `.claude/skills/` tự nạp.
+
+Cả ba làm việc trên cùng các tệp, nên bạn có thể ghi một ý tưởng trên điện thoại rồi viết xong PRD ở bàn làm việc.
+
+## Ví dụ
+
+Bạn viết câu bình thường. Trợ lý chỉ hỏi những dữ kiện còn thiếu, đưa bản nháp, và không ghi gì cho tới khi bạn đồng ý.
+
+```
+Bạn   Tạo yêu cầu tính năng: bot Telegram để PM ghi ý tưởng khi đang di chuyển
+Jev   Hai câu hỏi. Ai yêu cầu, và nó giải quyết vấn đề gì?
+Bạn   Nhóm PM. Ý tưởng nằm chết trong ghi âm, không bao giờ thành tài liệu.
+Jev   Bản nháp FR-001 ở dưới. Nói "lưu" để ghi.
+Bạn   lưu
+Jev   Đã lưu vào discovery/inbox/FR-001-telegram-bot.md
+      Tiếp theo: "Chấm RICE cho FR-001"
+```
+
+Từ đó đường đi là chấm điểm, nghiên cứu, cổng khám phá, PRD, epic. Dưới đây là một đoạn của epic ở cuối đường ấy trong [dự án mẫu](../examples/aipm-skills-project), [`EP-001-v1.0.md`](../examples/aipm-skills-project/epics/EP-001-telegram-bot/EP-001-v1.0.md):
+
+```markdown
+---
+doc-id: EP-001
+prd: PRD-001
+version: v1.0
+status: approved
+module: Bot
+sprint: S01
 ---
 
-## Xin chào
+### US-001 - Send Feature Request
 
-Phần lớn một tuần của người quản lý sản phẩm tan vào giấy tờ. Viết bản PRD mà không ai đọc
-cho tới buổi sprint planning. Tính lại điểm RICE vì file bảng tính đang nằm ở máy khác. Đến
-thứ Năm mới phát hiện hai đội cùng xây lại một endpoint.
+**As a** Product Manager,
+**I want to** describe a feature in plain language to the bot,
+**So that** a structured FR document is created automatically.
 
-Dự án này gánh phần việc đó cho bạn mà không giành mất quyền quyết định. Bạn mô tả nhu cầu
-bằng câu nói bình thường. Nó hỏi lại những gì cần biết, soạn tài liệu, rồi đưa bản nháp cho
-bạn xem. Không có gì được ghi vào file cho tới khi bạn đồng ý.
-
-Mọi thứ nó tạo ra đều là markdown thuần trong thư mục của bạn. Không có cơ sở dữ liệu nào
-bạn không đọc được, không cần nút xuất file, không bị khóa chân. Xóa công cụ này ngày mai
-thì các bản PRD vẫn nằm nguyên đó, mở bằng trình soạn thảo nào cũng đọc được.
-
-**Nó không phải cái gì.** Nó không đi nói chuyện với khách hàng thay bạn, và nó không bảo
-bạn nên xây gì. Nó viết tốt và nó không quên gì cả, đó là một kỹ năng khác với phán đoán.
-Phán đoán vẫn là của bạn, và toàn bộ hệ thống được dựng lên để giữ đúng như vậy.
-
----
-
-## Ý tưởng trong một phút
-
-```
-Bạn gõ  ->  Nó hỏi thứ nó cần  ->  Nó đưa bản nháp  ->  Bạn xác nhận  ->  Nó ghi file
+**Scenario 2 - Edge case: No active project set**
+Given: PM has not opened a project in this session
+When:  PM sends "Create a feature request"
+Then:  Bot asks "Which project is this for?" before proceeding
 ```
 
-Ba luật giữ cả hệ thống đứng vững.
+Mỗi tài liệu mang phần đầu (front matter) nối nó với phần còn lại: FR tới điểm RICE tới PRD tới epic, CR tới phiên bản PRD mà nó sinh ra.
 
-1. **Nó soạn nháp, bạn quyết.** Không file nào được tạo hay sửa mà bạn chưa nhìn thấy nội
-   dung trước và chưa nói đồng ý.
-2. **Đã duyệt là đóng băng.** Một bản PRD đã ký duyệt thì không bao giờ đổi nữa. Muốn đổi
-   thì tạo phiên bản mới, gắn với yêu cầu thay đổi đã gây ra nó.
-3. **Không gì mất đi trong im lặng.** Mọi phiên bản, mọi quyết định, mọi ý kiến của các bên
-   liên quan đều được ghi lại và liên kết với nhau.
-
----
-
-## Cuộc hội thoại đầu tiên
-
-Dùng nó thực tế trông như thế này.
-
-```
-Bạn   Tạo dự án mới cho việc thiết kế lại luồng thanh toán
-
-Jev   Trước khi tạo, tôi cần bốn thứ:
-      sản phẩm, độ ưu tiên (P0 tới P3), ngày kết thúc dự kiến, và mục tiêu trong một câu.
-
-Bạn   Payments, P1, 30/11/2026, giảm tỉ lệ bỏ giỏ hàng trên mobile
-
-Jev   Đây là bản nháp. Nói đồng ý là tôi tạo.
-
-      my-projects/PROJ-002-checkout-redesign/
-        PROJECT.md      mục tiêu, cột mốc, FR và PRD liên kết
-        VERSIONS.md     sổ đăng ký tài liệu
-        discovery/ prd/ epics/ cr/ stakeholders/ decisions/ sprints/
-
-Bạn   đồng ý
-
-Jev   Đã tạo. PROJ-002 giờ là dự án đang hoạt động.
-      Tiếp theo: "Tạo feature request cho [thứ bạn muốn xây]"
-
-Bạn   Tạo feature request cho Apple Pay một chạm
-
-Jev   Hai câu hỏi. Ai là người đề xuất, và nó giải quyết vấn đề gì?
-
-Bạn   Người dùng mobile. Chúng ta mất họ ở màn hình nhập thẻ.
-
-Jev   Bản nháp FR-004. Đọc rồi bảo tôi lưu.
-      ... vấn đề, người dùng, giải pháp được đề xuất ...
-
-Bạn   lưu đi
-
-Jev   Đã lưu vào discovery/inbox/FR-004-one-tap-apple-pay.md
-      Tiếp theo: "Chấm điểm RICE cho FR-004"
-```
-
-Từ đó đường đi là: chấm điểm, nghiên cứu, đưa qua cổng Discovery, chuyển thành PRD, rồi
-tách PRD thành các epic có tiêu chí chấp nhận dạng Given/When/Then. Mỗi bước đều gợi ý bước
-kế tiếp, nên bạn không phải thuộc lòng thứ tự.
-
----
-
-## Thứ bạn nhận được
-
-Một thư mục cho mỗi dự án, và tất cả thuộc về bạn.
-
-```
-my-projects/PROJ-002-checkout-redesign/
-  PROJECT.md                    mục tiêu, cột mốc, tài liệu liên kết
-  VERSIONS.md                   mọi tài liệu và trạng thái của nó
-  roadmap.md
-  discovery/
-    inbox/       FR-004-one-tap-apple-pay.md
-    scoring/     RICE-004-one-tap-apple-pay.md
-    research/    RS-004-payment-providers.md
-    gate/        approved.md - rejected.md - backlog.md
-  prd/
-    PRD-004-one-tap-checkout/
-      PRD-004-v1.0.md           đã duyệt, không bao giờ sửa lại
-      PRD-004-v1.1.md           phiên bản do một yêu cầu thay đổi sinh ra
-      CHANGELOG.md
-  epics/
-    EP-007-apple-pay-sheet/EP-007-v1.0.md
-  cr/
-    intake/ - assessment/ - approval-board/ - approved/ - rejected/
-    cr-log.md
-  stakeholders/  SH-003-robert-engineering-lead.md
-  decisions/ - reviews/ - sprints/
-```
-
-Mở bất kỳ file nào bằng Obsidian, VS Code hay Notion. Commit vào git thì lịch sử PRD của
-bạn trở thành một bản diff đọc được thật sự.
-
----
-
-## Công việc chảy như thế nào
+## Cách hoạt động
 
 ```mermaid
 graph LR
-    FR[Feature Request] --> RICE[Chấm điểm RICE]
-    RICE --> Gate{Cổng Discovery}
-    Gate -->|Đạt| PRD[Viết PRD]
-    Gate -->|Trượt| Fix[Bù chỗ thiếu]
-    Fix --> Gate
-    PRD --> Epics[Epic với\ntiêu chí Given/When/Then]
-    Epics --> Grill[Thử lửa bản PRD]
-    Grill --> Approve[Duyệt]
-    Approve --> Change{Có gì đổi?}
-    Change -->|Có| CR[Yêu cầu thay đổi]
-    CR --> Scan[Quét xung đột theo tag]
-    Scan --> Confirm{Tiếp tục?}
-    Confirm -->|Có| Apply[Phiên bản PRD mới]
-    Confirm -->|Không| Hold[Giữ lại CR]
-
-    style Approve fill:#2f855a,color:#fff
-    style Hold fill:#c53030,color:#fff
+    FR[Yêu cầu tính năng] --> RICE[Điểm RICE]
+    RICE --> Gate{Cổng khám phá}
+    Gate -->|đạt| PRD[PRD]
+    Gate -->|còn thiếu| FR
+    PRD --> Epics[Epic với Given/When/Then]
+    Epics --> Approve[Đã duyệt, khoá]
+    Approve --> CR[Yêu cầu thay đổi]
+    CR --> Scan[Quét xung đột theo thẻ]
+    Scan --> V2[Phiên bản PRD mới]
 ```
 
-Cổng Discovery là bước người ta hay bỏ qua rồi sau đó hối. Một tính năng chưa được thành
-PRD cho tới khi nó có điểm số, có nghiên cứu đứng sau, và có phân tích bảo mật thật khi nó
-chạm tới xác thực, dữ liệu cá nhân, thanh toán hay nhật ký kiểm toán. Kiểm tra cuối cùng đó
-không phải lời khuyên. Nó chặn.
+Ba luật giữ cả hệ thống:
 
----
+1. **Nó soạn, bạn quyết.** Mọi kỹ năng kết thúc bằng việc đưa bản nháp và chờ bạn đồng ý.
+2. **Đã duyệt là khoá.** PRD đã ký duyệt không bao giờ bị sửa. Một yêu cầu thay đổi sinh ra v1.1 hoặc v2.0, lý do ghi vào changelog và `VERSIONS.md`.
+3. **Cổng có giá trị thật.** Tính năng có RICE dưới 20 được hướng sang thành yêu cầu thay đổi trên một PRD có sẵn. Bản nghiên cứu thiếu mục Bảo mật và Tuân thủ thì cổng bị chặn.
 
-## Bắt đầu
-
-### 1. Clone về
-
-```bash
-git clone https://github.com/taman-spirit/product-skill-jev.git my-pm-workspace
-cd my-pm-workspace
-cp .env.example .env
-```
-
-Mở `.env` và đặt một key để bắt đầu.
-
-```env
-ANTHROPIC_API_KEY=sk-ant-your_key_here
-```
-
-### 2. Chọn thứ muốn chạy
-
-```bash
-bash setup.sh
-```
+Mỗi dự án là một thư mục markdown:
 
 ```
-What would you like to install?
-
-  1) Telegram bot only
-  2) Web portal only
-  3) Web portal + Telegram bot  <- recommended
-
-Enter option [1/2/3]:
+my-projects/PROJ-002-checkout-redesign/
+  PROJECT.md  VERSIONS.md
+  discovery/  inbox/ scoring/ research/ gate/
+  prd/        PRD-004-one-tap-checkout/PRD-004-v1.0.md, PRD-004-v1.1.md, CHANGELOG.md
+  epics/  cr/  stakeholders/  decisions/  sprints/  reviews/
 ```
 
-Một dự án mẫu được chép vào `my-projects/` ngay lần cài đầu tiên, để bạn có tài liệu thật
-mà nghịch trước khi tự viết.
+Mở bằng VS Code, Obsidian hay trình soạn thảo bất kỳ. Đưa vào git thì lịch sử PRD thành một bản so sánh đọc được.
 
-### 3. Chào một câu
+## Khác gì các lựa chọn khác
 
-Mở Telegram gửi `/start`, hoặc mở cổng web rồi gõ vào khung chat. Thử `Show all projects`
-trước. Nó gần như không tốn gì và cho bạn thấy hình dáng của hệ thống.
+| | Dự án này | Lời nhắc viết PRD trong trợ lý chat | Công cụ viết PRD bằng AI dạng dịch vụ |
+|---|---|---|---|
+| Tài liệu nằm ở đâu | Markdown thuần trong thư mục của bạn | Đoạn chat bạn phải chép ra | Không gian làm việc của nhà cung cấp |
+| Quy trình | FR, RICE, cổng, PRD, epic, CR; mỗi kỹ năng gợi ý bước kế | Từng tài liệu một | Chủ yếu soạn tài liệu |
+| Sau khi duyệt | Khoá, thay đổi thành phiên bản mới có liên kết | Không theo dõi | Tuỳ công cụ |
+| Xung đột giữa các PRD | Mã Python quét thẻ module dùng chung, rồi mô hình xếp hạng (tuỳ chọn) | Không có | Tuỳ công cụ |
+| Mô hình | Bạn chọn trong năm nhà cung cấp, kể cả mô hình chạy trên máy | Mô hình của trợ lý | Mô hình của nhà cung cấp |
+| Đổi cách làm việc | Sửa một `SKILL.md` bằng lời thường | Viết lại lời nhắc mỗi lần | Không làm được |
 
----
+Phép quét xung đột ([`bot/tags.py`](../bot/tags.py)) là mã bình thường: nó liệt kê mọi cặp PRD dùng chung một thẻ module và báo PRD không có thẻ là "không kiểm được", khác với "không xung đột". Chỉ sau đó mô hình mới được hỏi thẻ chung ấy có phải va chạm thật không.
 
-## Ba cách nói chuyện với nó
+Các luật còn lại (soạn trước khi ghi, khoá bản đã duyệt, cổng) là chỉ dẫn trong kỹ năng, do mô hình thực hiện. Với mô hình mạnh chúng đáng tin; với mô hình yếu nên kiểm lại.
 
-| Giao diện | Hợp với | Bắt đầu bằng |
-|-----------|---------|--------------|
-| **Telegram bot** | Chộp một ý tưởng trên điện thoại, xem tình hình giữa hai cuộc họp | `make start` rồi `/start` |
-| **Cổng web** | Làm việc thật. Chat bên trái, tài liệu đang viết bên phải | `cd apps && make start` |
-| **Claude Code** | Làm ngay trong repository, nơi các skill tự nạp | mở thư mục lên |
+## Kỹ năng
 
-### Cổng web
+Mỗi kỹ năng là một thư mục trong [`.claude/skills/`](../.claude/skills) chứa một `SKILL.md`. Claude Code tìm chúng qua phần mô tả; bot và backend web tìm qua bảng chỉ mục trong [`AGENT.md`](../AGENT.md).
 
-```
-+---------------------------------+----------------------------+
-|  Chat                           |  File viewer               |
-|                                 |                            |
-|  You: Create a feature request  |  FR-004-apple-pay.md       |
-|       for one-tap Apple Pay     |  -----------------         |
-|                                 |  ---                       |
-|  Jev: Two questions...          |  fr-id: FR-004             |
-|                                 |  status: draft             |
-|  [write_file] --------------->  |  [Refresh]                 |
-+---------------------------------+----------------------------+
-```
-
-Bốn màn hình. **Chat** kèm khung xem file trực tiếp, **Projects** để duyệt và sửa tài liệu,
-**Settings** cho các API key, và **Audit Log** là dòng thời gian của mọi thay đổi. Giao diện
-web hiện dùng tiếng Anh.
-
----
-
-## Bên trong
-
-```mermaid
-graph TB
-    PM([Quản lý sản phẩm]) -->|Văn bản| TG[Telegram Bot]
-    PM -->|Văn bản| CC[Claude Code CLI]
-    PM -->|Trình duyệt| WP[Cổng web]
-    PM -->|Tải file lên| TG
-
-    TG --> Agent[Vòng lặp agent]
-    CC --> Agent
-    WP --> BE[Backend FastAPI]
-    BE --> Agent
-
-    Agent -->|API| Claude["Anthropic Claude\n(khuyến nghị)"]
-    Agent -->|API| Alt["Groq - Gemini - OpenAI - Ollama"]
-    Agent -->|API| Jev["Bộ phân loại Jev\n(tùy chọn)"]
-
-    Agent --> Tools[Công cụ\nread - write - list - search - move\nscan_tags - judge]
-    Tools --> WS[(File của bạn)]
-
-    WS --> Sys["_system/\ncấu hình - dự án đang mở - settings.db"]
-    WS --> MP["my-projects/\nPROJ-001/ - PROJ-002/"]
-
-    style Claude fill:#191919,color:#fff
-    style Agent fill:#2d3748,color:#fff
-    style WP fill:#1a56db,color:#fff
-```
-
-Agent có bảy công cụ và không có gì khác. Năm cái đọc và ghi file. `scan_tags` xác định
-những PRD nào dùng chung một module, một cách tất định, bằng Python thuần. `judge` hỏi bộ
-phân loại Jev tùy chọn để lấy một nhận định có kiểu. Mọi thứ agent biết làm đều nằm trong
-`AGENT.md` và các skill dưới đây, viết bằng tiếng Anh mà bạn đọc và sửa được.
-
-### Các skill
-
-Mỗi skill là một thư mục trong `.claude/skills/` chứa đúng một file `SKILL.md`. Claude Code
-tìm thấy chúng qua phần mô tả. Bot và backend web tra chúng qua bảng chỉ mục trong
-`AGENT.md`.
-
-| Nhóm | Skill |
-|------|-------|
-| Discovery | create-fr, score-feature, gate-review, deep-research |
+| Nhóm | Kỹ năng |
+|------|--------|
+| Khám phá | create-fr, score-feature, gate-review, deep-research |
 | PRD | to-prd, manage-epic, conflict-check, grill-prd, update-prd |
 | Dự án | create-project, find-project, project-status |
 | Yêu cầu thay đổi | intake-cr, assess-cr, approve-cr |
 | Bên liên quan | add-stakeholder, draft-comms |
 | Nền tảng | setup-workspace, new-sprint, version-doc, product-skill-jev |
 
-Hai mươi mốt cái. Mở một cái ra đọc thử. Chúng là hướng dẫn chứ không phải code, và sửa một
-cái là đổi cách hệ thống hành xử.
+Chúng là chỉ dẫn, không phải mã. Sửa một kỹ năng là đổi cách trợ lý làm việc.
 
----
+Agent có đúng bảy công cụ: `read_file`, `write_file`, `list_files`, `search_files`, `move_file`, `scan_tags` và `judge` (xem [`bot/agent.py`](../bot/agent.py)).
 
-## Những luật nó giữ
+## Mô hình
 
-**Nó đưa bản nháp cho bạn xem.** Mọi skill đều kết thúc giống nhau: đây là thứ tôi định
-viết, đồng ý chứ. Đó không phải phép lịch sự, đó là thiết kế.
+Đặt `AI_PROVIDER` trong `.env`, hoặc lưu nhiều khoá ở trang Cài đặt của cổng web rồi chuyển bằng một cú bấm. [`.env.example`](../.env.example) có sẵn một khối cho mỗi lựa chọn.
 
-**Tài liệu đã duyệt thì không đổi.** Một bản PRD đã ký duyệt là đóng băng. Muốn khác đi thì
-tạo yêu cầu thay đổi. Duyệt nó sẽ sinh ra v1.1 hoặc v2.0 kèm lý do.
+| Nhà cung cấp | Thiết lập |
+|----------|---------|
+| Anthropic Claude (tài liệu tốt nhất) | `AI_PROVIDER=anthropic` |
+| OpenAI | `AI_PROVIDER=openai` |
+| Groq (có gói miễn phí, hợp để dùng thử) | `AI_PROVIDER=openai` với địa chỉ của Groq |
+| Google Gemini | `AI_PROVIDER=google` |
+| Ollama (chạy trên máy của bạn) | `AI_PROVIDER=openai` với địa chỉ localhost |
 
-**Các bên liên quan được ghi nhớ.** Mô tả một người một lần là bạn có hồ sơ của họ. Kể lại
-họ nói gì thì nó lưu ý kiến, quét các tài liệu của bạn, và chỉ ra chỗ nào có thể cần cập
-nhật, trước khi động vào bất cứ thứ gì.
+## Tuỳ chọn: bộ phân loại Jev
 
-**Xung đột do code tìm ra, không phải đoán mò.** Một đoạn quét Python đọc mọi PRD và trả về
-đầy đủ các cặp dùng chung tag module. PRD không có tag được báo là "không kiểm tra được",
-khác hẳn với "không có xung đột". Chỉ sau đó mới hỏi mô hình xem tag chung có phải va chạm
-thật hay không.
+Jev là bộ phân loại nhanh của TypeSafe AI, trả nhãn kèm xác suất thay vì văn xuôi. Khi đặt `TYPESAFE_API_KEY`, nó gợi ý loại và mức khẩn của phản hồi từ bên liên quan, định tuyến lệnh khi nhà cung cấp chính gặp sự cố, gợi ý thư mục cho tệp tải lên, và trả lời năm bộ câu hỏi có kiểu qua công cụ `judge`: `fr_triage`, `gate_review`, `rice_bands`, `cr_assessment`, `conflict_pair`.
 
-**Bạn đổi được nhà cung cấp AI.** Lưu nhiều key, kích hoạt một cái bằng một cú bấm. Claude
-được khuyến nghị vì chất lượng tài liệu. Gói miễn phí của Groq đủ dùng để thử nghiệm.
+Jev không bao giờ ghi tệp. Không có khoá, quá thời gian chờ hay độ tin thấp thì mọi đường đều quay về cách làm khi chưa có Jev. Câu hỏi và ngưỡng nằm ở [`bot/jev.py`](../bot/jev.py); cổng web cho phép đè ngưỡng và khôi phục mặc định. Chi tiết: [`.claude/skills/product-skill-jev`](../.claude/skills/product-skill-jev/SKILL.md).
 
----
-
-## Chọn mô hình
-
-Trong các lựa chọn ở đây, Claude viết PRD, epic và email cho các bên liên quan tốt nhất. Lấy
-key tại **https://console.anthropic.com/settings/keys**.
-
-| Mô hình | Mỗi 1M token | Hợp với |
-|---------|--------------|---------|
-| `claude-sonnet-4-6` | $3 / $15 | Việc hằng ngày. Bắt đầu ở đây |
-| `claude-opus-4-7` | $5 / $25 | PRD dài, phân tích rối |
-| `claude-haiku-4-5` | $1 / $5 | Tra cứu nhanh |
-
-Các nhà cung cấp khác cũng chạy được.
-
-| Nhà cung cấp | Cấu hình | Chi phí | Ghi chú |
-|--------------|----------|---------|---------|
-| **Anthropic Claude** | `AI_PROVIDER=anthropic` | $1 tới $25 / 1M | Khuyến nghị |
-| Groq | `AI_PROVIDER=openai` kèm URL của Groq | Gói miễn phí | Tốt để thử |
-| Google Gemini | `AI_PROVIDER=google` | Gói miễn phí | 15 request mỗi phút |
-| OpenAI | `AI_PROVIDER=openai` | $0.15 tới $10 / 1M | GPT-4o hoặc mini |
-| Ollama | `AI_PROVIDER=openai` kèm localhost | Miễn phí | Cần GPU tại chỗ |
-
----
-
-## Jev, bộ phân loại nhanh (tùy chọn)
-
-Jev là mô hình System One của TypeSafe AI. Nó không sinh văn bản. Bạn đưa cho nó văn bản và
-các câu hỏi có kiểu, nó trả về nhãn kèm xác suất đã hiệu chuẩn trong khoảng 70 tới 500 mili
-giây. Nó chạy song song với nhà cung cấp chính chứ không thay thế, và toàn bộ phần tích hợp
-nằm im nếu bạn không đưa key.
-
-Ba việc chạy trong Python, trước khi agent nhìn thấy đầu vào của bạn.
-
-- **Ý kiến của bên liên quan** được phân loại theo kiểu và mức khẩn, nên trường `Sentiment`
-  trong nhật ký phản hồi là gợi ý chứ không phải đoán.
-- **Định tuyến lệnh** thôi phụ thuộc vào từ khóa tiếng Anh khi nhà cung cấp chính lỗi hoặc
-  bị giới hạn tần suất.
-- **File tải lên** được đề xuất thư mục đích thay vì bị hỏi.
-
-Năm việc nữa chạy qua công cụ `judge`, vì chỉ agent mới cầm nội dung file.
-
-| Bộ câu hỏi | Ở đâu | Thêm được gì |
-|------------|-------|--------------|
-| `fr_triage` | create-fr | Phát hiện ý tưởng thực ra là yêu cầu thay đổi, hoặc chạm tới bảo mật |
-| `gate_review` | gate-review | Chặn cổng khi mục Security chỉ có tiêu đề mà rỗng ruột |
-| `rice_bands` | score-feature | Gợi ý dải điểm ngay trong câu hỏi, không bao giờ tự điền |
-| `cr_assessment` | assess-cr | Mức mở rộng phạm vi, và PRD cần v2.0 hay v1.1 |
-| `conflict_pair` | quét xung đột | Xếp hạng các cặp mà `scan_tags` đã tìm ra. Nó không tự tìm |
-
-Jev không bao giờ ghi file. Khi thiếu key, khi request hết giờ, hay khi độ tin cậy dưới
-ngưỡng, mọi nhánh đều quay về đúng hành vi hệ thống có trước khi Jev xuất hiện.
-
-```
-TYPESAFE_API_KEY=            # để trống là chạy mà không có Jev
-TYPESAFE_DEFAULT_MODEL=jev-latest
-# TYPESAFE_BASE_URL=         # mặc định https://api.typesafe.ai
-# TYPESAFE_TIMEOUT=3.0
-```
-
-Mọi câu hỏi và mọi ngưỡng mặc định nằm trong `bot/jev.py`, ngay cạnh các số đo mà chúng được
-chốt dựa trên. Trang Settings của cổng web đặt được key, tắt được Jev, và ghi đè được bất kỳ
-ngưỡng nào. Giá trị ghi đè chồng lên mặc định, trang web chỉ rõ cái nào đang lệch, và một
-nút đưa tất cả về bộ đã đo. Sửa một ngưỡng không làm phép đo chạy lại, nên trang web nói
-trước điều đó.
-
-Hướng dẫn đầy đủ nằm ở `.claude/skills/product-skill-jev`.
-
----
-
-## Lệnh dùng hằng ngày
+## Lệnh và test
 
 ```bash
-# Telegram bot, chạy từ thư mục gốc
-make start      # khởi động
-make stop       # dừng
-make restart    # khởi động lại
-make update     # build lại image rồi khởi động lại
-make logs       # xem log trực tiếp
-make status     # kiểm tra sức khỏe
-
-# Cổng web, chạy từ apps/
-cd apps
-make start
-make stop
-make logs
-make build      # build lại sau khi sửa code
+make start | stop | restart | logs | status | update     # bot Telegram, từ gốc kho
+cd apps && make start | stop | logs | build               # cổng web
 ```
-
----
-
-## Kiểm thử
 
 ```bash
-# toàn bộ (170 test)
-cd apps/backend && python3 -m pytest ../../tests/ -v
-
-# theo nhóm
-python3 -m pytest tests/test_installation.py   # 35
-python3 -m pytest tests/test_agent_tools.py    # 26
-python3 -m pytest tests/test_backend_api.py    # 26
-python3 -m pytest tests/test_jev.py            # 61
-python3 -m pytest tests/test_tags.py           # 22
+pip install -r tests/requirements.txt -r apps/backend/requirements.txt -r bot/requirements.txt
+cd apps/backend && python3 -m pytest ../../tests/
 ```
 
-Vài test import `bot/bot.py`, vốn cần Python 3.10 trở lên. Chúng tự bỏ qua trên bản thông
-dịch cũ hơn. Trên 3.12 trong Docker thì cả bộ đều chạy.
+Bộ test có 170 test trong năm tệp (cài đặt 35, công cụ agent 26, API backend 26, Jev 61, quét thẻ 22). Khi đã có tệp `.env` (phép kiểm cấu hình Docker đọc nó) và backend không chạy, 144 test đạt và 26 test API tự bỏ qua. Không test nào gọi API trả phí.
 
----
+## Nó không phải là gì
 
-## Những câu hay được hỏi
+Nó không nói chuyện với khách hàng của bạn và không bảo bạn nên làm gì. Nó viết tốt và không quên gì, đó là một kỹ năng khác với óc phán đoán. Phán đoán vẫn là của bạn.
 
-**Tôi có cần biết kỹ thuật không?** Không. Bạn gõ câu thường. Nó lo thư mục, mã ID, biểu mẫu
-và các liên kết chéo.
+## Ghi công và giấy phép
 
-**Dữ liệu của tôi nằm ở đâu?** Là file markdown trong thư mục của chính bạn. Không có gì
-được lưu ở nơi khác.
+Dựa trên ý tưởng từ [mattpocock/skills](https://github.com/mattpocock/skills) (định dạng kỹ năng), [chấm điểm RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) (Intercom), [Continuous Discovery Habits](https://www.producttalk.org/) (Teresa Torres), [Inspired](https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/) (Marty Cagan), [user story](https://www.mountaingoatsoftware.com/agile/user-stories) (Mike Cohn) và [Architectural Decision Records](https://adr.github.io/).
 
-**Nhiều người dùng chung một workspace được không?** Được. Chia sẻ thư mục qua git hoặc ổ
-đĩa chung. Git tốt hơn, vì khi đó lịch sử tài liệu là lịch sử thật.
-
-**Tôi sửa file bằng tay được không?** Cứ tự nhiên. Đó là markdown. Chỉ nhớ rằng tài liệu đã
-duyệt là để đóng băng, và hệ thống sẽ nhắc nếu bạn quên.
-
-**Nếu nó không trả lời thì sao?** Mở Settings kiểm tra xem đã lưu key chưa và nhà cung cấp
-đang hoạt động có hiện đèn xanh không.
-
-**Có bắt buộc dùng Jev không?** Không. Để trống `TYPESAFE_API_KEY` là mọi thứ chạy đúng như
-trước khi Jev được thêm vào.
-
----
-
-## Tài liệu đã định hình dự án này
-
-| Lĩnh vực | Nguồn |
-|----------|-------|
-| Định dạng skill | [mattpocock/skills](https://github.com/mattpocock/skills) |
-| Chấm điểm tính năng | [RICE Scoring](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/), Intercom |
-| Khám phá sản phẩm | [Continuous Discovery Habits](https://www.producttalk.org/), Teresa Torres |
-| Chuẩn mực PRD | [Inspired](https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/), Marty Cagan |
-| User story | [Writing Good User Stories](https://www.mountaingoatsoftware.com/agile/user-stories), Mike Cohn |
-| Ghi nhận quyết định | [Architectural Decision Records](https://adr.github.io/) |
-
----
-
-CC BY-NC 4.0 - [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+Do [Nhật Nguyệt](https://github.com/Nhat-Nguyet) duy trì. Giấy phép [CC BY-NC 4.0](../LICENSE): được dùng, chia sẻ và chỉnh sửa cho mục đích phi thương mại, kèm ghi công.

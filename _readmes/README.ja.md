@@ -1,465 +1,196 @@
-[🇺🇸 English](../README.md)
+<p align="center">
+  <img src="../apps/frontend/public/logo.png" alt="Product Management Skill Jev" width="96">
+</p>
+
+<h1 align="center">Product Management Skill Jev</h1>
 
 <p align="center">
-  <strong>Product Management Skill Jev</strong>
+  <b>ドキュメントを書き、プロセスを誠実に保ち、すべての判断をあなたに委ねるプロダクトマネジメントのコパイロット。</b><br>
+  機能要求から変更要求までの 21 スキル · 承認済み PRD は凍結、変更は新しいバージョンに · PRD 間の衝突は決定的なタグスキャンで検出 · あなたのフォルダに置かれるプレーンな Markdown · Telegram、Web ポータル、Claude Code · Anthropic、OpenAI、Gemini、Groq、ローカルの Ollama モデル · テスト 170 件
 </p>
 
 <p align="center">
-  ドキュメントを書き、プロセスを守り、判断はすべてあなたに残す<br/>
-  プロダクトマネジメントの副操縦士。入力は普通の言葉、出力は素の markdown。
+  <a href="../README.md">English</a> · <a href="README.vi.md">Tiếng Việt</a> · <a href="README.zh-CN.md">中文</a> · <b>日本語</b> · <a href="README.fr.md">Français</a> · <a href="README.es.md">Español</a>
+  <br>
+  <a href="#クイックスタート">クイックスタート</a> ·
+  <a href="#例">例</a> ·
+  <a href="#スキル">スキル</a> ·
+  <a href="../AGENT.md">エージェントのルール</a> ·
+  <a href="../examples/aipm-skills-project">サンプルプロジェクト</a>
 </p>
 
 <p align="center">
-  <a href="https://www.anthropic.com/"><img src="https://img.shields.io/badge/Claude-Recommended-191919?style=flat-square&logo=anthropic&logoColor=white" alt="Anthropic Claude" /></a>
-  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python_3.12-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /></a>
-  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_14-000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" /></a>
-  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" /></a>
-  <a href="https://telegram.org/"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white" alt="Telegram" /></a>
-  <img src="https://img.shields.io/badge/Tests-170_passing-2f855a?style=flat-square" alt="Tests" />
-  <img src="https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey?style=flat-square" alt="CC BY-NC 4.0" />
+  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-000?style=flat-square&logo=next.js&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-compose-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Tests: 170" src="https://img.shields.io/badge/tests-170-2f855a?style=flat-square">
+  <a href="../LICENSE"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC_BY--NC_4.0-lightgrey?style=flat-square"></a>
 </p>
 
-<p align="center">
-  🌐 <a href="../README.md">🇺🇸 English</a> ·
-  <a href="README.vi.md">🇻🇳 Tiếng Việt</a> ·
-  <a href="README.zh-CN.md">🇨🇳 中文</a> ·
-  <a href="README.fr.md">🇫🇷 Français</a> ·
-  🇯🇵 日本語（このページ）·
-  <a href="README.es.md">🇪🇸 Español</a>
-</p>
+> 英語版 [README.md](../README.md) が原文です。この翻訳は同じ事実と同じ構成を保っています。
 
-> この翻訳は[英語版](../README.md)より数バージョン遅れている場合があります。英語版が正本です。
+## クイックスタート
 
+Docker とモデルの API キーが 1 つ必要です。ドキュメントの品質は Claude が最も高く、試すだけなら無料の Groq キーで十分です。
+
+```bash
+git clone https://github.com/Nhat-Nguyet/product-skill-jev.git my-pm-workspace
+cd my-pm-workspace
+cp .env.example .env      # AI_PROVIDER とキーを 1 つ設定。ボットを使うなら TELEGRAM_BOT_TOKEN も
+bash setup.sh             # 1) Telegram ボット  2) Web ポータル  3) 両方
+```
+
+得られるもの:
+
+- **Web ポータル** `http://localhost`(選択肢 2 と 3): 左にチャット、右に書きかけのドキュメント。ほかにプロジェクト、設定、すべての変更を記録する監査ログ。サンプルプロジェクトが `my-projects/` にコピーされるので、初日から開いて見られます。
+- **Telegram ボット**(選択肢 1 と 3): ボットに `/start`、続けて `Show all projects` を送ります。
+- **Claude Code**(Docker 不要): `cp AGENT.md CLAUDE.md` のあと、フォルダ内で `claude` を実行します。`.claude/skills/` のスキルは自動で読み込まれます。
+
+3 つとも同じファイルを扱うので、スマートフォンで思いついたアイデアを机で PRD に仕上げられます。
+
+## 例
+
+普通の文で話しかけます。コパイロットは足りない事実だけを尋ね、下書きを見せ、あなたが確認するまで何も書き込みません。
+
+```
+あなた  外出先でも PM がアイデアを記録できる Telegram ボットの機能要求を作って
+Jev     2 つ質問です。誰の要望で、どんな問題を解決しますか?
+あなた  PM チーム。アイデアがボイスメモに埋もれて、ドキュメントにならない。
+Jev     FR-001 の下書きです。「保存」と言えば書き込みます。
+あなた  保存
+Jev     discovery/inbox/FR-001-telegram-bot.md に保存しました
+        次: 「FR-001 を RICE で採点」
+```
+
+その先はスコアリング、リサーチ、ディスカバリーゲート、PRD、エピックと進みます。以下は[サンプルプロジェクト](../examples/aipm-skills-project)でその道の終点にあるエピック [`EP-001-v1.0.md`](../examples/aipm-skills-project/epics/EP-001-telegram-bot/EP-001-v1.0.md) の抜粋です:
+
+```markdown
+---
+doc-id: EP-001
+prd: PRD-001
+version: v1.0
+status: approved
+module: Bot
+sprint: S01
 ---
 
-## はじめに
+### US-001 - Send Feature Request
 
-プロダクトマネージャーの一週間は、その大半が書類仕事に溶けていきます。スプリントプランニング
-まで誰も開かない PRD を書く。表計算ファイルが別のノート PC にあるせいで RICE スコアを計算し
-直す。木曜になって、二つのチームが同じエンドポイントを作り直していたと気づく。
+**As a** Product Manager,
+**I want to** describe a feature in plain language to the bot,
+**So that** a structured FR document is created automatically.
 
-このプロジェクトは、その作業を引き受けます。ただし判断まで持っていったりはしません。普通の
-文章で必要なことを伝えると、足りない事実を聞き返し、ドキュメントを起草し、下書きを見せます。
-あなたが「はい」と言うまで、何ひとつファイルには書き込まれません。
-
-生成物はすべて、あなたの手元のフォルダにある素の markdown です。読めないデータベースも、
-エクスポートボタンも、囲い込みもありません。明日このツールを消しても、PRD はそこに残り、
-どんなテキストエディタでも開けます。
-
-**これは何ではないか。** 顧客との会話を代行はしませんし、何を作るべきかも教えません。文章が
-うまく、何も忘れない。それは判断力とは別の能力です。判断はあなたのものであり、仕組み全体が
-そう保つために作られています。
-
----
-
-## 一分で分かる考え方
-
-```
-あなたが書く  ->  必要なことを尋ねる  ->  下書きを見せる  ->  あなたが承認  ->  ファイルに書く
+**Scenario 2 - Edge case: No active project set**
+Given: PM has not opened a project in this session
+When:  PM sends "Create a feature request"
+Then:  Bot asks "Which project is this for?" before proceeding
 ```
 
-三つのルールが全体を支えています。
+各ドキュメントは front matter で他とつながっています。FR から RICE スコア、PRD、エピックへ。CR からそれが生んだ PRD のバージョンへ。
 
-1. **起草するのは AI、決めるのはあなた。** 内容を見せ、同意を得ないまま作成も変更もしません。
-2. **承認済みは凍結。** 一度サインオフされた PRD は二度と変わりません。変更は新しいバージョン
-   となり、それを引き起こした変更依頼と結び付けられます。
-3. **黙って消えるものはない。** すべてのバージョン、決定、ステークホルダーの意見が記録され、
-   互いにリンクされます。
-
----
-
-## 最初の会話
-
-実際に使うと、こんな具合です。
-
-```
-あなた  チェックアウト刷新の新しいプロジェクトを作って
-
-Jev     作る前に四つだけ確認します。
-        プロダクト、優先度（P0 から P3）、目標終了日、そして目的を一文で。
-
-あなた  Payments、P1、30/11/2026、モバイルのチェックアウト離脱を減らす
-
-Jev     これが下書きです。はいと言えば作成します。
-
-        my-projects/PROJ-002-checkout-redesign/
-          PROJECT.md      目的、マイルストーン、紐づく FR と PRD
-          VERSIONS.md     ドキュメント台帳
-          discovery/ prd/ epics/ cr/ stakeholders/ decisions/ sprints/
-
-あなた  はい
-
-Jev     作成しました。PROJ-002 が現在のプロジェクトです。
-        次は「[作りたいもの] のフィーチャーリクエストを作って」
-
-あなた  ワンタップ Apple Pay のフィーチャーリクエストを作って
-
-Jev     二つ質問です。誰の要望で、どんな課題を解きますか。
-
-あなた  モバイルのユーザー。カード入力画面で離脱している。
-
-Jev     FR-004 の下書きです。読んだら保存と言ってください。
-        ... 課題、ユーザー、要望されている解決策 ...
-
-あなた  保存して
-
-Jev     discovery/inbox/FR-004-one-tap-apple-pay.md に保存しました。
-        次は「FR-004 を RICE で採点して」
-```
-
-ここから先は、採点し、調査し、Discovery Gate を通し、PRD にして、Given/When/Then の受け入れ
-基準を持つエピックに分解していきます。各ステップが次を提案するので、順番を覚える必要はあり
-ません。
-
----
-
-## 最終的に手元に残るもの
-
-プロジェクトごとに一つのフォルダ。そしてそれはすべてあなたのものです。
-
-```
-my-projects/PROJ-002-checkout-redesign/
-  PROJECT.md                    目的、マイルストーン、関連ドキュメント
-  VERSIONS.md                   すべてのドキュメントとその状態
-  roadmap.md
-  discovery/
-    inbox/       FR-004-one-tap-apple-pay.md
-    scoring/     RICE-004-one-tap-apple-pay.md
-    research/    RS-004-payment-providers.md
-    gate/        approved.md - rejected.md - backlog.md
-  prd/
-    PRD-004-one-tap-checkout/
-      PRD-004-v1.0.md           承認済み。以後編集しない
-      PRD-004-v1.1.md           変更依頼が生んだバージョン
-      CHANGELOG.md
-  epics/
-    EP-007-apple-pay-sheet/EP-007-v1.0.md
-  cr/
-    intake/ - assessment/ - approval-board/ - approved/ - rejected/
-    cr-log.md
-  stakeholders/  SH-003-robert-engineering-lead.md
-  decisions/ - reviews/ - sprints/
-```
-
-Obsidian でも VS Code でも Notion でも開けます。git に入れれば、PRD の履歴が本当に読める
-diff になります。
-
----
-
-## 仕事の流れ
+## 仕組み
 
 ```mermaid
 graph LR
-    FR[フィーチャーリクエスト] --> RICE[RICE 採点]
-    RICE --> Gate{Discovery Gate}
-    Gate -->|通過| PRD[PRD を書く]
-    Gate -->|不通過| Fix[不足を埋める]
-    Fix --> Gate
-    PRD --> Epics[エピック\nGiven/When/Then の受け入れ基準]
-    Epics --> Grill[PRD を叩く]
-    Grill --> Approve[承認]
-    Approve --> Change{変更あり?}
-    Change -->|あり| CR[変更依頼]
-    CR --> Scan[タグによる衝突スキャン]
-    Scan --> Confirm{進めますか?}
-    Confirm -->|はい| Apply[新しい PRD バージョン]
-    Confirm -->|いいえ| Hold[CR を保留]
-
-    style Approve fill:#2f855a,color:#fff
-    style Hold fill:#c53030,color:#fff
+    FR[機能要求] --> RICE[RICE スコア]
+    RICE --> Gate{ディスカバリーゲート}
+    Gate -->|通過| PRD[PRD]
+    Gate -->|不足あり| FR
+    PRD --> Epics[Given/When/Then 付きエピック]
+    Epics --> Approve[承認済み、凍結]
+    Approve --> CR[変更要求]
+    CR --> Scan[タグ衝突スキャン]
+    Scan --> V2[新しい PRD バージョン]
 ```
 
-Gate は、飛ばして後悔することになる工程です。スコアがあり、裏付けとなる調査があり、そして
-認証、個人データ、決済、監査ログに触れる場合は本物のセキュリティ分析があること。それまで
-機能は PRD になりません。最後の確認は助言ではなく、実際に通行を止めます。
+全体を支える 3 つのルール:
 
----
+1. **下書きはコパイロット、判断はあなた。** どのスキルも最後に下書きを見せ、同意を待ちます。
+2. **承認は凍結を意味する。** 承認済みの PRD は編集されません。変更要求は v1.1 または v2.0 を生み、理由は changelog と `VERSIONS.md` に記録されます。
+3. **ゲートには意味がある。** RICE が 20 未満の機能は、既存 PRD への変更要求として扱うよう促されます。セキュリティとコンプライアンスの節がないリサーチはゲートを止めます。
 
-## はじめかた
-
-### 1. クローンする
-
-```bash
-git clone https://github.com/taman-spirit/product-skill-jev.git my-pm-workspace
-cd my-pm-workspace
-cp .env.example .env
-```
-
-`.env` を開き、まずキーを一つ設定します。
-
-```env
-ANTHROPIC_API_KEY=sk-ant-your_key_here
-```
-
-### 2. 何を動かすか選ぶ
-
-```bash
-bash setup.sh
-```
+各プロジェクトは Markdown のフォルダ 1 つです:
 
 ```
-What would you like to install?
-
-  1) Telegram bot only
-  2) Web portal only
-  3) Web portal + Telegram bot  <- recommended
-
-Enter option [1/2/3]:
+my-projects/PROJ-002-checkout-redesign/
+  PROJECT.md  VERSIONS.md
+  discovery/  inbox/ scoring/ research/ gate/
+  prd/        PRD-004-one-tap-checkout/PRD-004-v1.0.md, PRD-004-v1.1.md, CHANGELOG.md
+  epics/  cr/  stakeholders/  decisions/  sprints/  reviews/
 ```
 
-初回インストール時にサンプルプロジェクトが `my-projects/` にコピーされるので、自分で書き始
-める前に本物のドキュメントを触って確かめられます。
+VS Code、Obsidian など任意のエディタで開けます。git にコミットすれば、PRD の履歴は読める diff になります。
 
-### 3. 挨拶してみる
+## 何が違うのか
 
-Telegram で `/start` を送るか、Web ポータルのチャットに打ち込みます。まずは
-`Show all projects` から。ほとんど費用はかからず、全体の形が見えます。
+| | このプロジェクト | チャットアシスタントでの PRD プロンプト | ホスト型の AI PRD ツール |
+|---|---|---|---|
+| ドキュメントの置き場所 | あなたのフォルダのプレーンな Markdown | 手でコピーするチャット履歴 | ベンダーのワークスペース |
+| プロセス | FR、RICE、ゲート、PRD、エピック、CR。各スキルが次の手順を提案 | 1 回に 1 ドキュメント | 主にドキュメントの起草 |
+| 承認後 | 凍結、変更はリンクされた新バージョン | 追跡なし | ツール次第 |
+| PRD 間の衝突 | 共有モジュールタグを Python でスキャン、その後モデルで順位付け(任意) | 対象外 | ツール次第 |
+| モデル | ローカルモデルを含む 5 つのプロバイダから選択 | アシスタントのモデル | ベンダーのモデル |
+| 振る舞いの変更 | `SKILL.md` を普通の言葉で編集 | 毎回プロンプトを書き直す | できない |
 
----
+衝突スキャン([`bot/tags.py`](../bot/tags.py))は普通のコードです。モジュールタグを共有する PRD の組をすべて列挙し、タグのない PRD は「検査不能」と報告します。これは「衝突なし」とは違います。共有タグが本当の衝突かどうかをモデルに尋ねるのは、その後です。
 
-## 三つの使い方
+その他のルール(書き込み前の下書き、承認済みの凍結、ゲート)はスキル内の指示で、モデルが実行します。強いモデルでは信頼でき、弱いモデルでは確認する価値があります。
 
-| 窓口 | 向いている場面 | 始め方 |
-|------|---------------|--------|
-| **Telegram ボット** | 外出先で思いつきを拾う、会議の合間の状況確認 | `make start` のあと `/start` |
-| **Web ポータル** | 本格的な作業。左にチャット、右に書いているドキュメント | `cd apps && make start` |
-| **Claude Code** | リポジトリの中で作業する。スキルが自動で読み込まれる | フォルダを開く |
+## スキル
 
-### Web ポータル
+各スキルは [`.claude/skills/`](../.claude/skills) 配下のフォルダで、`SKILL.md` を 1 つ持ちます。Claude Code は説明文からスキルを見つけ、ボットと Web バックエンドは [`AGENT.md`](../AGENT.md) の索引から見つけます。
 
-```
-+---------------------------------+----------------------------+
-|  Chat                           |  File viewer               |
-|                                 |                            |
-|  You: Create a feature request  |  FR-004-apple-pay.md       |
-|       for one-tap Apple Pay     |  -----------------         |
-|                                 |  ---                       |
-|  Jev: Two questions...          |  fr-id: FR-004             |
-|                                 |  status: draft             |
-|  [write_file] --------------->  |  [Refresh]                 |
-+---------------------------------+----------------------------+
-```
-
-画面は四つ。ファイルを横で見られる **Chat**、ドキュメントを閲覧・編集する **Projects**、API
-キーを扱う **Settings**、そして全変更の時系列を追う **Audit Log**。Web の UI は現在英語です。
-
----
-
-## 内部のしくみ
-
-```mermaid
-graph TB
-    PM([プロダクトマネージャー]) -->|テキスト| TG[Telegram ボット]
-    PM -->|テキスト| CC[Claude Code CLI]
-    PM -->|ブラウザ| WP[Web ポータル]
-    PM -->|ファイル送信| TG
-
-    TG --> Agent[エージェントのループ]
-    CC --> Agent
-    WP --> BE[FastAPI バックエンド]
-    BE --> Agent
-
-    Agent -->|API| Claude["Anthropic Claude\n(推奨)"]
-    Agent -->|API| Alt["Groq - Gemini - OpenAI - Ollama"]
-    Agent -->|API| Jev["Jev 分類器\n(任意)"]
-
-    Agent --> Tools[ツール\nread - write - list - search - move\nscan_tags - judge]
-    Tools --> WS[(あなたのファイル)]
-
-    WS --> Sys["_system/\n設定 - 現在のプロジェクト - settings.db"]
-    WS --> MP["my-projects/\nPROJ-001/ - PROJ-002/"]
-
-    style Claude fill:#191919,color:#fff
-    style Agent fill:#2d3748,color:#fff
-    style WP fill:#1a56db,color:#fff
-```
-
-エージェントが持つツールは七つだけです。五つはファイルの読み書き。`scan_tags` は素の Python
-で、どの PRD が同じモジュールを共有しているかを決定的に割り出します。`judge` は任意の Jev
-分類器に型付きの判断を求めます。エージェントができることはすべて `AGENT.md` と下記のスキルに
-英語で書かれており、読んで書き換えられます。
-
-### スキル
-
-各スキルは `.claude/skills/` 配下のフォルダで、`SKILL.md` を一つ持ちます。Claude Code は説明
-文から見つけます。ボットと Web バックエンドは `AGENT.md` の索引を通して引きます。
-
-| 領域 | スキル |
+| 分野 | スキル |
 |------|--------|
-| Discovery | create-fr, score-feature, gate-review, deep-research |
+| ディスカバリー | create-fr, score-feature, gate-review, deep-research |
 | PRD | to-prd, manage-epic, conflict-check, grill-prd, update-prd |
 | プロジェクト | create-project, find-project, project-status |
-| 変更依頼 | intake-cr, assess-cr, approve-cr |
+| 変更要求 | intake-cr, assess-cr, approve-cr |
 | ステークホルダー | add-stakeholder, draft-comms |
-| 基盤 | setup-workspace, new-sprint, version-doc, product-skill-jev |
+| プラットフォーム | setup-workspace, new-sprint, version-doc, product-skill-jev |
 
-全部で二十一個。ひとつ開いて読んでみてください。コードではなく指示書なので、書き換えれば
-システムの振る舞いが変わります。
+スキルはコードではなく指示です。1 つ編集すれば、コパイロットの振る舞いが変わります。
 
----
+エージェントのツールは 7 つだけです: `read_file`、`write_file`、`list_files`、`search_files`、`move_file`、`scan_tags`、`judge`([`bot/agent.py`](../bot/agent.py) 参照)。
 
-## 守っているルール
+## モデル
 
-**下書きを必ず見せます。** どのスキルも終わり方は同じです。こう書くつもりですが、よいですか。
-礼儀ではなく、設計です。
+`.env` で `AI_PROVIDER` を設定するか、ポータルの設定ページに複数のキーを保存してワンクリックで切り替えます。[`.env.example`](../.env.example) に各選択肢の設定ブロックがあります。
 
-**承認済みのドキュメントは変わりません。** サインオフされた PRD は凍結されます。違うものが
-必要なら変更依頼を出してください。承認すると理由付きで v1.1 か v2.0 が生まれます。
+| プロバイダ | 設定 |
+|----------|---------|
+| Anthropic Claude(ドキュメント品質が最高) | `AI_PROVIDER=anthropic` |
+| OpenAI | `AI_PROVIDER=openai` |
+| Groq(無料枠あり、お試し向け) | `AI_PROVIDER=openai` と Groq の base URL |
+| Google Gemini | `AI_PROVIDER=google` |
+| Ollama(自分のマシンで動作) | `AI_PROVIDER=openai` と localhost の base URL |
 
-**ステークホルダーは記憶されます。** 一度その人を説明すればプロフィールができます。発言を
-伝えるとフィードバックを保存し、ドキュメントを走査して、何かに触れる前に更新が要りそうな
-箇所を見せます。
+## オプション: Jev 分類器
 
-**衝突はコードが見つけます。当て推量ではありません。** Python のスキャンが全 PRD を読み、
-モジュールタグを共有する組み合わせをすべて返します。タグのない PRD は「確認できない」と報告
-されます。これは「衝突がない」とは別物です。共有タグが本当の衝突かどうかをモデルに尋ねるのは
-その後です。
+Jev は TypeSafe AI の高速分類器で、文章ではなく確率付きのラベルを返します。`TYPESAFE_API_KEY` を設定すると、ステークホルダーのフィードバックの種類と緊急度を提案し、メインのプロバイダが使えないときにコマンドを振り分け、アップロードされたファイルの保存先を提案し、`judge` ツールで 5 つの型付き質問セットに答えます: `fr_triage`、`gate_review`、`rice_bands`、`cr_assessment`、`conflict_pair`。
 
-**AI プロバイダは切り替えられます。** 複数のキーを保存し、クリックひとつで有効化。ドキュメント
-の品質では Claude を推奨します。試すだけなら Groq の無料枠で十分です。
+Jev はファイルを書きません。キーがない、タイムアウト、確信度が低いときは、どの経路も Jev がない場合の動作に戻ります。質問としきい値は [`bot/jev.py`](../bot/jev.py) にあり、ポータルでしきい値を上書きしたり既定値に戻したりできます。詳細: [`.claude/skills/product-skill-jev`](../.claude/skills/product-skill-jev/SKILL.md)。
 
----
-
-## モデルを選ぶ
-
-ここに挙げた選択肢の中では、Claude が最も良い PRD、エピック、ステークホルダー向けメールを
-書きます。キーは **https://console.anthropic.com/settings/keys** で取得してください。
-
-| モデル | 100万トークンあたり | 向いている用途 |
-|--------|--------------------|---------------|
-| `claude-sonnet-4-6` | $3 / $15 | 日々の作業。まずはここから |
-| `claude-opus-4-7` | $5 / $25 | 長い PRD、込み入った分析 |
-| `claude-haiku-4-5` | $1 / $5 | 手早い確認 |
-
-他のプロバイダでも動きます。
-
-| プロバイダ | 設定 | 費用 | 備考 |
-|-----------|------|------|------|
-| **Anthropic Claude** | `AI_PROVIDER=anthropic` | $1 から $25 / 100万 | 推奨 |
-| Groq | `AI_PROVIDER=openai` と Groq の URL | 無料枠 | 試用に良い |
-| Google Gemini | `AI_PROVIDER=google` | 無料枠 | 毎分15リクエスト |
-| OpenAI | `AI_PROVIDER=openai` | $0.15 から $10 / 100万 | GPT-4o か mini |
-| Ollama | `AI_PROVIDER=openai` と localhost | 無料 | ローカル GPU が必要 |
-
----
-
-## Jev、速い分類器（任意）
-
-Jev は TypeSafe AI の System One モデルです。文章は書きません。テキストと型付きの質問を渡す
-と、おおよそ 70 から 500 ミリ秒で、較正済みの確率付きラベルを返します。主プロバイダの代わり
-ではなく隣で動き、キーを与えなければ統合全体が眠ったままです。
-
-三つは Python 側で、エージェントが入力を見る前に動きます。
-
-- **ステークホルダーの意見**が種類と緊急度で分類され、フィードバックログの `Sentiment` 欄は
-  推測ではなく提案になります。
-- **コマンドの振り分け**が、主プロバイダのエラー時やレート制限時に英語キーワード頼みでなく
-  なります。
-- **アップロードされたファイル**に、質問ではなく保存先フォルダの提案が付きます。
-
-残る五つは `judge` ツール経由です。ファイルの中身を持っているのはエージェントだけだからです。
-
-| 質問セット | 使う場面 | 何が増えるか |
-|-----------|---------|-------------|
-| `fr_triage` | create-fr | 実は変更依頼であるアイデアや、セキュリティに触れるアイデアを見抜く |
-| `gate_review` | gate-review | セキュリティ節が見出しだけで中身がないとき Gate を止める |
-| `rice_bands` | score-feature | 質問の中で目安を提案する。値を代わりに埋めることはしない |
-| `cr_assessment` | assess-cr | スコープの増分と、PRD が v2.0 か v1.1 のどちらを要するか |
-| `conflict_pair` | 衝突スキャン | `scan_tags` が見つけた組み合わせを順位付けする。自分では見つけない |
-
-Jev がファイルを書くことはありません。キーがない、リクエストがタイムアウトした、確信度が
-しきい値を下回った。いずれの場合も、Jev が入る前のシステムの動きに戻ります。
-
-```
-TYPESAFE_API_KEY=            # 空のままなら Jev なしで動く
-TYPESAFE_DEFAULT_MODEL=jev-latest
-# TYPESAFE_BASE_URL=         # 既定は https://api.typesafe.ai
-# TYPESAFE_TIMEOUT=3.0
-```
-
-すべての質問と既定のしきい値は `bot/jev.py` にあり、その根拠となった実測値のすぐ隣に置かれて
-います。ポータルの Settings 画面からキーの設定、Jev のオフ、任意のしきい値の上書きができます。
-上書き値は既定値の上に重なり、どれが既定から外れているかが画面に示され、ボタンひとつで実測
-された一式に戻せます。しきい値を変えても裏側の測定はやり直されません。だから画面はそれを先に
-伝えます。
-
-詳しい指針は `.claude/skills/product-skill-jev` にあります。
-
----
-
-## 日常のコマンド
+## コマンドとテスト
 
 ```bash
-# Telegram ボット。リポジトリのルートで
-make start      # 起動
-make stop       # 停止
-make restart    # 再起動
-make update     # イメージを作り直して再起動
-make logs       # ログを追う
-make status     # 稼働確認
-
-# Web ポータル。apps/ の中で
-cd apps
-make start
-make stop
-make logs
-make build      # コード変更後に作り直す
+make start | stop | restart | logs | status | update     # Telegram ボット、リポジトリのルートで
+cd apps && make start | stop | logs | build               # Web ポータル
 ```
-
----
-
-## テスト
 
 ```bash
-# すべて（170 テスト）
-cd apps/backend && python3 -m pytest ../../tests/ -v
-
-# 領域ごと
-python3 -m pytest tests/test_installation.py   # 35
-python3 -m pytest tests/test_agent_tools.py    # 26
-python3 -m pytest tests/test_backend_api.py    # 26
-python3 -m pytest tests/test_jev.py            # 61
-python3 -m pytest tests/test_tags.py           # 22
+pip install -r tests/requirements.txt -r apps/backend/requirements.txt -r bot/requirements.txt
+cd apps/backend && python3 -m pytest ../../tests/
 ```
 
-一部のテストは `bot/bot.py` を import するため Python 3.10 以上が必要です。それより古い
-インタプリタでは自動的にスキップされます。Docker の 3.12 では全件が走ります。
+テストは 5 ファイルに計 170 件(インストール 35、エージェントツール 26、バックエンド API 26、Jev 61、タグスキャン 22)。`.env` があり(Docker 設定チェックが読み込みます)バックエンドが動いていない状態では、144 件が通り、API テスト 26 件は自動でスキップされます。有料 API を呼ぶテストはありません。
 
----
+## これは何ではないか
 
-## よくある質問
+顧客と話すことも、何を作るべきかを決めることもしません。上手に書き、何も忘れませんが、それは判断力とは別の能力です。判断はあなたのものです。
 
-**技術者でなくても使えますか。** 使えます。あなたは文章を書くだけで、フォルダ、ID、テンプ
-レート、相互リンクはこちらが扱います。
+## 謝辞とライセンス
 
-**データはどこにありますか。** あなた自身のフォルダの markdown ファイルです。他のどこにも
-保存されません。
+アイデアの出典: [mattpocock/skills](https://github.com/mattpocock/skills)(スキル形式)、[RICE スコアリング](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/)(Intercom)、[Continuous Discovery Habits](https://www.producttalk.org/)(Teresa Torres)、[Inspired](https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/)(Marty Cagan)、[ユーザーストーリー](https://www.mountaingoatsoftware.com/agile/user-stories)(Mike Cohn)、[Architectural Decision Records](https://adr.github.io/)。
 
-**チームで一つのワークスペースを共有できますか。** できます。git か共有ドライブでフォルダを
-共有してください。git の方が良いのは、そうすればドキュメントの履歴が本物の履歴になるからです。
-
-**ファイルを手で編集してもよいですか。** どうぞ。markdown です。ただし承認済みのドキュメント
-は凍結しておくものだ、ということは忘れずに。忘れてもシステムが指摘します。
-
-**返事が来なくなったら。** Settings を開き、キーが保存されているか、有効なプロバイダが緑に
-なっているかを確認してください。
-
-**Jev は必須ですか。** いいえ。`TYPESAFE_API_KEY` を空にしておけば、Jev が入る前とまったく
-同じように動きます。
-
----
-
-## このプロジェクトを形づくった文献
-
-| 領域 | 出典 |
-|------|------|
-| スキルの形式 | [mattpocock/skills](https://github.com/mattpocock/skills) |
-| 機能の採点 | [RICE Scoring](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/)、Intercom |
-| プロダクトディスカバリー | [Continuous Discovery Habits](https://www.producttalk.org/)、Teresa Torres |
-| PRD の基準 | [Inspired](https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/)、Marty Cagan |
-| ユーザーストーリー | [Writing Good User Stories](https://www.mountaingoatsoftware.com/agile/user-stories)、Mike Cohn |
-| 意思決定の記録 | [Architectural Decision Records](https://adr.github.io/) |
-
----
-
-CC BY-NC 4.0 - [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+[Nhat Nguyet](https://github.com/Nhat-Nguyet) がメンテナンスしています。ライセンスは [CC BY-NC 4.0](../LICENSE): クレジット表記のうえ、非営利目的での利用、共有、改変が可能です。
