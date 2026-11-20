@@ -11,12 +11,13 @@ description: Calculate RICE and ICE scores for a Feature Request. Use when the u
 
 | Input | Scale | Definition |
 |-------|-------|-----------|
-| Reach | 1-10 | Users/transactions affected per sprint. 10 = entire user base |
+| Reach | 0-100 | Percentage of target users or transactions affected per sprint. 100 = entire user base |
 | Impact | 0.25 / 0.5 / 1 / 2 / 3 | Minimal / Low / Medium / High / Massive |
 | Confidence | 20% / 50% / 80% / 100% | Guess / Some data / Clear evidence / Proven |
 | Effort | person-weeks | 1 = one developer for one week |
 
-**ICE = Impact x Confidence x Ease**
+**ICE = Impact x Confidence% x Ease**
+- Impact and Confidence are the same answers as in RICE
 - Ease: 1-10 (10 = very easy to implement)
 
 ## Interview Flow
@@ -25,7 +26,7 @@ When scoring begins, read the FR file first. Then open the scoring session with:
 
 "To calculate the RICE score for [feature name], I need a few inputs from you. Let's go through them one at a time.
 
-**Question 1 -- Reach:** On a scale of 1 to 10, how many users or transactions does this feature affect per sprint? (1 = a small subset, 10 = your entire user base)
+**Question 1 -- Reach:** What percentage of your target users or transactions does this feature affect per sprint? (5 = a small subset, 100 = your entire user base)
 
 I'll ask about Impact, Confidence, and Effort after you answer this one."
 
@@ -58,7 +59,7 @@ RICE Score: [value]
 Formula: ([Reach] x [Impact] x [Confidence]%) / [Effort] = [result]
 
 ICE Score: [value]
-Formula: [Impact] x [Confidence] x [Ease] = [result]
+Formula: [Impact] x [Confidence]% x [Ease] = [result]
 
 Recommendation: [ELIGIBLE / NEEDS RESEARCH / RECOMMEND REJECT]
 Rationale: [1-2 sentences]

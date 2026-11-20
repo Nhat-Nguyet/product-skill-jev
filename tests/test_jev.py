@@ -278,17 +278,17 @@ class TestRiceBands:
         doc_stub(monkeypatch, {"reach_band": score(2.0, conf=below)})
         out = jev.judge("rice_bands", "fr text")
         assert "no suggestion" in out
-        assert "suggest 7" not in out
+        assert "suggest 70" not in out
 
     def test_bands_map_onto_the_score_feature_scale(self, monkeypatch, api_key):
         doc_stub(monkeypatch, {
-            "reach_band": score(2.0, conf=0.9),          # -> 7 of 10
+            "reach_band": score(2.0, conf=0.9),          # -> 70 percent of users
             "impact_band": score(3.0, conf=0.9),         # -> 3
             "effort_band": score(1.0, conf=0.9),         # -> 2 person-weeks
             "evidence_strength": score(2.0, conf=0.9),   # -> 80 percent
         })
         out = jev.judge("rice_bands", "fr text")
-        assert "Reach: suggest 7 of 10" in out
+        assert "Reach: suggest 70 percent of users" in out
         assert "Impact: suggest 3" in out
         assert "Effort: suggest 2 person-weeks" in out
         assert "Confidence: suggest 80 percent" in out

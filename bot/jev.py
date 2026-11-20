@@ -1012,7 +1012,7 @@ def _verdict_conflict_pair(a: dict) -> list[str]:
 
 # Each band maps onto the scale score-feature already asks the PM about.
 RICE_SCALES = {
-    "reach_band": ("Reach", [1, 3, 7, 10], "of 10"),
+    "reach_band": ("Reach", [10, 30, 70, 100], "percent of users"),
     "impact_band": ("Impact", [0.25, 0.5, 1, 3], ""),
     "effort_band": ("Effort", [1, 2, 6, 10], "person-weeks"),
     "evidence_strength": ("Confidence", [20, 50, 80, 100], "percent"),

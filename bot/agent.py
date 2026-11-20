@@ -331,12 +331,13 @@ rice-score: not scored
     answer. Ask all four questions. Never record a value the PM did not confirm.
 3. Show guide: "RICE scoring takes 2 minutes. I'll ask 4 questions."
 4. Ask one at a time:
-   Q1: Reach - how many users affected per sprint? (1-10, 10=all users)
+   Q1: Reach - what percentage of target users is affected per sprint? (0-100, 100=all users)
    Q2: Impact - how much does it improve their experience? (0.25=minimal, 1=medium, 3=massive)
    Q3: Confidence - how sure are you about these estimates? (20%=guess, 80%=evidence, 100%=proven)
    Q4: Effort - how many person-weeks to build? (1=1 dev 1 week)
+   Q5: Ease - how easy is it to implement? (1-10, 10=very easy)
 5. Calculate: RICE = (Reach x Impact x Confidence%) / Effort
-   Also: ICE = Impact x Confidence x Ease (Ease = 10 - Effort scaled)
+   Also: ICE = Impact x Confidence% x Ease (Ease from Q5)
 6. write_file("[PROJECT]/discovery/scoring/RICE-NNN-[slug].md") with full formula shown
 7. If RICE >= 40: suggest gate review. If RICE < 20: suggest as CR on existing PRD
 

@@ -123,7 +123,7 @@ Questions:
 Use the answers:
 
 - Map each band to the scale in `score-feature`, then present it as
-  `Question 1 - Reach: ... (suggested: 7, from the FR text. Confirm or change.)`
+  `Question 1 - Reach: ... (suggested: 70%, from the FR text. Confirm or change.)`
 - `evidence_strength` maps to the Confidence percentage the same way, and this one is the safest
   to suggest because it is a property of the document rather than a forecast.
 - Record in the RICE file which values the PM changed from the suggestion. That is the data you
